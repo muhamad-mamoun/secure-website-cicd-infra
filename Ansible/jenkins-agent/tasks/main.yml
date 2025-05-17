@@ -1,0 +1,6 @@
+- name: Delete the previous container if exist
+  shell: docker rm -f jenkins-agent
+  ignore_errors: true
+
+- name: Run Jenkins agent container
+  shell: docker run -d -v /var/run/:/var/run/ -v /usr/bin/docker:/usr/bin/docker --name jenkins-agent m2moun/jenkins-agent

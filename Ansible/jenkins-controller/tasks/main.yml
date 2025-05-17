@@ -1,0 +1,14 @@
+- name: Create presistence volume for Jenkins
+  file:
+    state: directory
+    path: /home/ubuntu/jenkins_home
+    owner: "ubuntu"
+    group: "ubuntu"
+    mode: "0755"
+
+- name: Delete the previous container if exist
+  shell: docker rm -f jenkins-controller
+  ignore_errors: true
+
+- name: Run Jenkins controller container
+  shell: docker run -d -p 8080:8080 -v /home/ubuntu/jenkins_home:/var/jenkins_home -v /var/run/:/var/run/ -v /usr/bin/docker:/usr/bin/docker --name jenkins-controller jenkins/jenkins:lts

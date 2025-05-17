@@ -1,0 +1,6 @@
+- name: Delete the previous container if exist
+  shell: docker rm -f "{{ container_name }}"
+  ignore_errors: true
+
+- name: Create the website container
+  shell: docker run -d -p 80:80 --name "{{ container_name }}" "{{ image_name }}"

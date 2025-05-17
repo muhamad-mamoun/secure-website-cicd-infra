@@ -1,0 +1,19 @@
+- name: Install and setup Docker
+  hosts: all
+  roles:
+    - docker
+
+- name: Install Jenkins controller
+  hosts: bastion_server
+  roles:
+    - jenkins-controller
+
+- name: Install Jenkins agent
+  hosts: application_server
+  roles:
+    - jenkins-agent
+
+- name: Run website container
+  hosts: application_server
+  roles:
+    - website
