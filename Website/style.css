@@ -1,0 +1,30 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    height: 100dvh;
+    color: #EAEAEA;
+    font-family: monospace;
+    background: linear-gradient(to right top, #0B0B0D, #09122C);
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+p {
+    font-size: 20px;
+    text-align: center;
+    line-height: 25px;
+}
+
+img {
+    height: 320px;
+}
