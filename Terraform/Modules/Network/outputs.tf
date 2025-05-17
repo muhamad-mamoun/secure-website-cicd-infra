@@ -7,7 +7,7 @@ output "public-subnets-ids" {
 }
 
 output "private-subnets-ids" {
-  value = [for subnet in aws_subnet.public-subnets : subnet.id]
+  value = [for subnet in aws_subnet.private-subnets : subnet.id]
 }
 
 output "load-balancer-security-group-id" {
