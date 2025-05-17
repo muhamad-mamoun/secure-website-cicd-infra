@@ -19,19 +19,11 @@ module "compute" {
   depends_on = [module.network]
 }
 
-resource "null_resource" "copy-key-pairs" {
+resource "null_resource" "setup-ansible-files" {
   provisioner "local-exec" {
-    command = "cp ssh-private-key ~/.ssh/ && cp ssh-private-key.pub ~/.ssh/"
+    command = <<END
+                  cp ssh-private-key ~/.ssh/ && cp ssh-private-key.pub ~/.ssh/
+                  sed -i -e "s/{{bastion_server_ip}}/${module.compute.bastion-server-public-ip}/g" -e "s/{{application_server_ip}}/${module.compute.application-server-private-ip}/g" ../Ansible/inventory.ini
+                END
   }
-}
-
-resource "local_file" "ansible-inventory" {
-  filename = "../Ansible/inventory.ini"
-  content  = <<END
-[bastion_server]
-bastion_server ansible_host=${module.compute.bastion-server-public-ip}
-
-[application_server]
-application_server ansible_host=${module.compute.application-server-private-ip} ansible_ssh_common_args="-o ProxyJump=ubuntu@${module.compute.bastion-server-public-ip}"
-END
 }
