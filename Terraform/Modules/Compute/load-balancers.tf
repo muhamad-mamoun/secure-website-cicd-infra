@@ -18,7 +18,7 @@ resource "aws_lb" "application-load-balancer" {
   security_groups            = [var.load-balancer-security-group-id]
   enable_deletion_protection = false
   ip_address_type            = "ipv4"
-  subnets                    = var.private-subnets-ids
+  subnets                    = var.public-subnets-ids
 }
 
 resource "aws_lb_listener" "application-load-balancer-listener" {
